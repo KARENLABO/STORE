@@ -1,5 +1,6 @@
 .Home{
-    margin-top: 2rem;;
+    margin-top: 2rem;
+    text-align: center;
 }
 
 .items-container{
@@ -18,7 +19,10 @@
 
 .item-price{
     color: rgba(255, 34, 0, 0.72);
-    
+}
+
+.category-tag{
+    cursor: pointer;
 }
 
 .modal-content{
