@@ -7,7 +7,7 @@ import './styles.css';
 
 
 function Home() {
-  const [data, Setdata] = useState();
+  const [data, setData] = useState();
   const [categories, setCategories] = useState();
   const [isShown, setIsShown] = useState(false);
   const [item, setItem] = useState();
@@ -15,7 +15,6 @@ function Home() {
   const { products, setProducts } = useContext(StoreContext);
   const { Meta } = Card;
   
-console.log(products);
   const onMouseOn = (item) =>{
     setIsShown(true);
     setItem(item);
@@ -33,14 +32,19 @@ console.log(products);
   }
 
   const filterbyCategory = (category) => {
-    
+    if (category === 'All') {
+      setData(products)
+    } else {
+      setData(products.filter((product) => product.category === category))
+    }
   }
 
   useEffect(()=>{
     const bringData = async() => {
       try{
         const data = await axios.get('https://fakestoreapi.com/products/');
-        Setdata(data.data);
+        setProducts(data.data);
+        setData(data.data);
         setCategories(filterCategories(data.data))
       }catch (e) {
         console.log(e);
@@ -48,7 +52,7 @@ console.log(products);
     }
     bringData();
 
-  },[]);
+  },[setProducts]);
 
   
   return (
@@ -76,7 +80,7 @@ console.log(products);
       </Modal>
 
       <div className='Tags'>
-       <Tag  className='category-tag' onClick = {filterbyCategory('All')}key='All' color="cyan">All</Tag>
+       <Tag  className='category-tag' onClick = {() => filterbyCategory('All')}key='All' color="cyan">All</Tag>
 
         {categories && (categories.map((category) => {
           return (
