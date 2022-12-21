@@ -11,18 +11,11 @@
     flex-wrap: wrap;
     gap: 3rem;
     margin-bottom: 5rem;
+    z-index: 1;
 }
 
 .item-img{
     height: 250px;
-}
-
-.item-price{
-    color: rgba(255, 34, 0, 0.72);
-}
-
-.category-tag{
-    cursor: pointer;
 }
 
 .modal-content{
