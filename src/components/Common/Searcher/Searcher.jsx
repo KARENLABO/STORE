@@ -61,7 +61,7 @@ const Searcher = ({ setData }) => {
       onSearch={handleSearch}
       onClick={handleOnClick}
     >
-      <Input.Search size="large" placeholder="Search Product" enterButton />
+      <Input.Search size="large" placeholder="Search Product"  />
     </AutoComplete>
   );
 };
