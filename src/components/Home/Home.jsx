@@ -50,7 +50,7 @@ function Home() {
     <div className="Home">
 
       {!data &&       
-        <Spin tip="Loading" size="large">
+        <Spin tip="Loading..." size="large" className='Spin'>
           <div className="content" />
         </Spin>
       }

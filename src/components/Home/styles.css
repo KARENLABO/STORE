@@ -19,6 +19,10 @@
     height: 250px;
 }
 
+.Spin{
+    margin-top: 13rem;
+}
+
 .modal-content{
     display: flex;
     justify-content: center;
