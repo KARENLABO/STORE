@@ -1,5 +1,7 @@
-import { Modal } from 'antd';
-import {  Rate } from 'antd';
+import {  Rate, Divider, Modal, Button } from 'antd';
+import {
+  PlusOutlined
+} from '@ant-design/icons';
 import './styles.css';
 
 
@@ -12,25 +14,42 @@ function ModalProduct(props) {
   return (
     <div className="Modal">
         <Modal
-        title={`${title} ${id} `}
         centered
         open={isShown}
         onOk={closeModal}
         onCancel={closeModal}
-        width={600}
+        width={700}
       >
         <div className='modal-content'>
-          <img
-            alt="example"
-            src={image} 
-            className='item-img'
-          />
-          <p className='item-price'>{`$ ${price}`}</p>
-          <p>{description}</p>
-          <Rate disabled value={rating.rate} />
-          <p>{rating.rate}</p>
-        </div>
+          <div className='image-container'>
+            <div >
+              <img
+                alt="example"
+                src={image} 
+                className='item-img'
+              />
+            </div>
+          </div>
 
+          <div className='item-content'>
+            <p className='item-title'>{title}</p>
+            <p className='item-sku'>{`SKU: ${id}`}</p>
+            <div className='item-rate'>
+              <Rate disabled value={rating.rate} />
+              <p>{rating.rate}</p>
+            </div>
+            <p className='item-price'>{`$ ${price}`}</p>
+
+            <Divider dashed orientation="right" orientationMargin={50}>
+              Description
+            </Divider>
+
+            <p className='item-description'>{description}</p>
+            <Button className='item-add-to-cart' type="primary" block icon={<PlusOutlined />}>
+               ADD TO CART
+            </Button>
+          </div>
+        </div>
       </Modal>
 
     </div>
