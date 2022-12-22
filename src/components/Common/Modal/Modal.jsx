@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { StoreContext } from '../../Context/StoreContext';
 import {  Rate, Divider, Modal, Button } from 'antd';
 import {
   PlusOutlined
@@ -8,8 +10,21 @@ import './styles.css';
 function ModalProduct(props) {
   const {item, isShown, setIsShown} = props;
   const { id, title, image, price, description, rating } = item;
+  const { cart, addProductsToCart } = useContext(StoreContext);
 
   const closeModal = () => setIsShown(false);
+
+  const onAddToCart = () => {
+    const copyOfCart = cart;
+    const index = cart.findIndex((p) => p.title === item.title);
+
+    if (index === -1){
+      addProductsToCart([...cart,{...item, 'quantity': 1}])
+    }else{
+      copyOfCart[index]= {...copyOfCart[index], 'quantity': copyOfCart[index].quantity +1 }
+      addProductsToCart(copyOfCart);
+    }
+  }
     
   return (
     <div className="Modal">
@@ -45,7 +60,7 @@ function ModalProduct(props) {
             </Divider>
 
             <p className='item-description'>{description}</p>
-            <Button className='item-add-to-cart' type="primary" block icon={<PlusOutlined />}>
+            <Button onClick={onAddToCart} className='item-add-to-cart' type="primary" block icon={<PlusOutlined />}>
                ADD TO CART
             </Button>
           </div>

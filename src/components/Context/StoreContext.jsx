@@ -7,13 +7,16 @@ export const StoreContext = createContext();
 export const StoreContextProvider = ({ children }) => {
     //  we created the states Here.
     const [products, setProducts] = useState([]);
+    const [cart, addProductsToCart] = useState([]);
 
     return (
         //  we export the states here.
         <StoreContext.Provider
             value={{
                 products, 
-                setProducts
+                setProducts,
+                cart, 
+                addProductsToCart
             }}>{children}
         </StoreContext.Provider>
     );
