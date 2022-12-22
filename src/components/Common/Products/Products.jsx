@@ -1,6 +1,7 @@
 import {  useState } from 'react';
 import { Avatar, Card} from 'antd';
 import ModalProduct from '../Modal/Modal';
+import './styles.css';
 
 function Products(props) {
   const {items } = props;
@@ -18,8 +19,7 @@ function Products(props) {
   return (
     <div className="Products-container">
 
-      <ModalProduct item={item} isShown={isShown} setIsShown={setIsShown}/>
-
+    {item && <ModalProduct item={item} isShown={isShown} setIsShown={setIsShown}/> }
 
       {items && (
         <div className='items-container'>

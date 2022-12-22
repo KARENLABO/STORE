@@ -3,6 +3,8 @@ import axios from 'axios';
 import { StoreContext } from '../Context/StoreContext';
 import TagsCategories from '../Common/TagsCategories/TagsCategories';
 import Products from '../Common/Products/Products';
+import {  Spin } from 'antd';
+import Searcher from '../Common/Searcher/Searcher'
 import './styles.css';
 
 const PRODUCTS_URL = 'https://fakestoreapi.com/products/';
@@ -46,11 +48,24 @@ function Home() {
   
   return (
     <div className="Home">
-      {categories && <TagsCategories categories={categories} filterbyCategory={filterbyCategory}/>}
-      {data && <Products items={data}/>}
+
+      {!data &&       
+        <Spin tip="Loading" size="large">
+          <div className="content" />
+        </Spin>
+      }
+
+      {data && (
+        <>
+          <Searcher setData={setData}/>
+          {categories && <TagsCategories categories={categories} filterbyCategory={filterbyCategory}/>}
+          <Products items={data}/>
+        </>
+      )}
+
     </div>
   );
 }
-
+ 
 export default Home;
 
