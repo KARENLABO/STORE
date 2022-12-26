@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { StoreContext } from '../../Context/StoreContext';
-import {  Rate, Divider, Modal, Button } from 'antd';
+import {  Rate, Divider, Modal, Button, message} from 'antd';
 import {
   PlusOutlined
 } from '@ant-design/icons';
@@ -11,8 +11,16 @@ function ModalProduct(props) {
   const {item, isShown, setIsShown} = props;
   const { id, title, image, price, description, rating } = item;
   const { cart, addProductsToCart } = useContext(StoreContext);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const closeModal = () => setIsShown(false);
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Successfully added to cart',
+    });
+  };
 
   const onAddToCart = () => {
     const copyOfCart = cart;
@@ -24,6 +32,7 @@ function ModalProduct(props) {
       copyOfCart[index]= {...copyOfCart[index], 'quantity': copyOfCart[index].quantity +1 }
       addProductsToCart(copyOfCart);
     }
+    success();
   }
     
   return (
@@ -41,7 +50,7 @@ function ModalProduct(props) {
               <img
                 alt="example"
                 src={image} 
-                className='item-img'
+                className='item-img-modal'
               />
             </div>
           </div>
@@ -60,6 +69,8 @@ function ModalProduct(props) {
             </Divider>
 
             <p className='item-description'>{description}</p>
+
+            {contextHolder}
             <Button onClick={onAddToCart} className='item-add-to-cart' type="primary" block icon={<PlusOutlined />}>
                ADD TO CART
             </Button>

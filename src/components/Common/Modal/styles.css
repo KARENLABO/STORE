@@ -5,12 +5,9 @@ p {
     margin: 0;
 }
 
-.Modal{
-    width: ;
-}
-
 .modal-content{
     display: grid;
+    grid-template-rows: 1fr;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
@@ -18,6 +15,11 @@ p {
 
 .image-container{
     text-align: center;
+}
+
+.item-img-modal{
+    max-width: 250px;
+    max-height: 250px;
 }
 
 .item-content{
@@ -71,7 +73,6 @@ p {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
-        justify-content: center;
-        align-items: center;
+
     }
 }
