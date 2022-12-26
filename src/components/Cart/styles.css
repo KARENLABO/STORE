@@ -19,12 +19,14 @@
 .summary-container{
     background-color: rgba(202, 202, 213, 0.224);
     padding: 1rem 2rem;
+    border-radius: 1rem;
 }
 
 .amount-container{
     background-color: rgba(202, 202, 213, 0.224);
     padding: 2rem 2rem;
     max-height: 30%;
+    border-radius: 1rem;
 }
 
 .subtotal-container{
