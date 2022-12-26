@@ -10,6 +10,15 @@ import './styles.css';
 function Cart() {
   const { cart } = useContext(StoreContext);
 
+
+  const totalAmount = () => {
+    let suma = 0;
+    for (let product of cart){
+      suma += product.quantity * product.price;
+    }
+    return suma.toFixed(2);
+  };
+
   const handleOnPay = () => {
 
   }
@@ -47,7 +56,7 @@ function Cart() {
           <h1 className='title'> Total Amount </h1>
           <div className='subtotal-container'>
             <p>Subtotal</p>
-            <p className='total'>$0</p>
+            <p className='total'>$ {totalAmount()} </p>
           </div>
           <Button onClick={handleOnPay} className='pay-button' type="primary" block >
                PAY
