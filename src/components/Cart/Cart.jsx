@@ -1,14 +1,18 @@
-import {  useContext } from 'react';
+import {  useContext, useState } from 'react';
 import { StoreContext } from '../Context/StoreContext';
 import CartProducts from '../Common/CartProducts/CartProducts';
-import { Button, Empty } from 'antd';
+import { Button, Empty, Modal, Result } from 'antd';
 import empty_cart from "../../Assets/empty_cart.png"
 import { Link } from "react-router-dom";
+import { LoadingOutlined } from '@ant-design/icons';
+
 import './styles.css';
 
 
 function Cart() {
-  const { cart } = useContext(StoreContext);
+  const { cart, addProductsToCart } = useContext(StoreContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   const totalAmount = () => {
@@ -19,8 +23,18 @@ function Cart() {
     return suma.toFixed(2);
   };
 
-  const handleOnPay = () => {
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
+  const handleOnPay = () => {
+    setIsModalOpen(true);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      addProductsToCart([]);
+    }, 4000);
   }
   
   return (
@@ -62,6 +76,23 @@ function Cart() {
                PAY
           </Button>
         </div>
+        <Modal open={isModalOpen} onOk={handleCancel} onCancel={handleCancel}>
+        
+        {loading && (
+          <Result
+          icon={<LoadingOutlined />}
+          title="Processing the Order, please wait"
+        />
+        )}
+
+        {!loading && (
+          <Result
+          status="success"
+          title="Order completed successfully!"
+        />
+        )}
+
+      </Modal>
     </div>
   );
 }
