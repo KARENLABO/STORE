@@ -1,6 +1,7 @@
 import {  useState } from 'react';
 import { Avatar, Card} from 'antd';
 import ModalProduct from '../Modal/Modal';
+
 import './styles.css';
 
 function Products(props) {
@@ -9,8 +10,9 @@ function Products(props) {
   const [isShown, setIsShown] = useState(false);
   const [item, setItem] = useState();
 
+
   const { Meta } = Card;
-  
+
   const handleOnClick = (item) =>{
     setIsShown(true);
     setItem(item);

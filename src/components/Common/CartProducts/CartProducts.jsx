@@ -18,14 +18,14 @@ function CartProducts() {
     };
       
     const decrease = (item) => {
-        if(item.quantity <2){
-            const removeItem = cart.filter((p) => p.title !== item.title)
-           return addProductsToCart(Array.from(removeItem)); 
-        }else{
+        if(item.quantity >= 2){
             const copyOfCart = cart;
             const index = cart.findIndex((p) => p.title === item.title);
-            copyOfCart[index]= {...copyOfCart[index], 'quantity': copyOfCart[index].quantity -1 };
+            copyOfCart[index]= {...copyOfCart[index], quantity: copyOfCart[index].quantity -1 };
             addProductsToCart(Array.from(copyOfCart));
+        } else {
+            const removeItem = cart.filter((p) => p.title !== item.title)
+            return addProductsToCart(removeItem); 
         }
     };
 

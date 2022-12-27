@@ -1,9 +1,7 @@
 import { useContext } from 'react';
 import { StoreContext } from '../../Context/StoreContext';
 import {  Rate, Divider, Modal, Button, message} from 'antd';
-import {
-  PlusOutlined
-} from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import './styles.css';
 
 
