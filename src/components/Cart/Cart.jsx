@@ -72,25 +72,21 @@ function Cart() {
             <p>Subtotal</p>
             <p className='total'>$ {totalAmount()} </p>
           </div>
-          <Button onClick={handleOnPay} className='pay-button' type="primary" block >
+          <Button onClick={handleOnPay} className='pay-button' type="primary" block disabled={cart.length === 0}>
                PAY
           </Button>
         </div>
         <Modal open={isModalOpen} onOk={handleCancel} onCancel={handleCancel}>
         
-        {loading && (
+        {loading ? (
           <Result
           icon={<LoadingOutlined />}
           title="Processing the Order, please wait"
-        />
-        )}
-
-        {!loading && (
-          <Result
+        />) : (
+        <Result
           status="success"
           title="Order completed successfully!"
-        />
-        )}
+        />)}
 
       </Modal>
     </div>

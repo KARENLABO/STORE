@@ -3,6 +3,7 @@ import { StoreContext } from '../../Context/StoreContext';
 import {  Rate, Divider, Modal, Button, message} from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import './styles.css';
+import { updateItemQuantityFromCart } from '../../../utils';
 
 
 function ModalProduct(props) {
@@ -21,15 +22,7 @@ function ModalProduct(props) {
   };
 
   const onAddToCart = () => {
-    const copyOfCart = cart;
-    const index = cart.findIndex((p) => p.title === item.title);
-
-    if (index === -1){
-      addProductsToCart([...cart,{...item, 'quantity': 1}])
-    }else{
-      copyOfCart[index]= {...copyOfCart[index], 'quantity': copyOfCart[index].quantity +1 }
-      addProductsToCart(copyOfCart);
-    }
+    addProductsToCart(updateItemQuantityFromCart(cart, item, 1));
     success();
   }
     

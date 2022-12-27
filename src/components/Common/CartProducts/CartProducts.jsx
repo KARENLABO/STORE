@@ -3,42 +3,34 @@ import { StoreContext } from '../../Context/StoreContext';
 import { MinusOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Button, Divider } from 'antd';
 import './styles.css';
+import { removeProductFromCart, updateItemQuantityFromCart } from '../../../utils';
 
 
 function CartProducts() {
     const ButtonGroup = Button.Group;
     const { cart, addProductsToCart } = useContext(StoreContext);
 
-
     const increase = (item) => {
-        const copyOfCart = cart;
-        const index = cart.findIndex((p) => p.title === item.title);
-        copyOfCart[index] = {...copyOfCart[index], quantity: copyOfCart[index].quantity +1 };
-        addProductsToCart(Array.from(copyOfCart));
+        addProductsToCart(updateItemQuantityFromCart(cart, item, 1));
     };
       
     const decrease = (item) => {
         if(item.quantity >= 2){
-            const copyOfCart = cart;
-            const index = cart.findIndex((p) => p.title === item.title);
-            copyOfCart[index]= {...copyOfCart[index], quantity: copyOfCart[index].quantity -1 };
-            addProductsToCart(Array.from(copyOfCart));
+            addProductsToCart(updateItemQuantityFromCart(cart, item, -1));
         } else {
-            const removeItem = cart.filter((p) => p.title !== item.title)
-            return addProductsToCart(removeItem); 
+            addProductsToCart(removeProductFromCart(cart, item.title)); 
         }
     };
 
     const handleOnDelete = (item) => {
-        const removeItem = cart.filter((p) => p.title !== item.title)
-        return addProductsToCart(Array.from(removeItem)); 
+        addProductsToCart(removeProductFromCart(cart, item.title)); 
     }
 
   return (
     <div className="cart-products-container">
         {cart.map((product) => {
-             const {title, price, quantity, image, id} = product;
-             const total = (price * quantity).toFixed(2);
+            const {title, price, quantity, image, id} = product;
+            const total = (price * quantity).toFixed(2);
             return (
                 <div className='product-container-cart' key={id}>
                     <div className='product-image-container'>
@@ -73,10 +65,7 @@ function CartProducts() {
                                 <Button onClick={() => increase(product)} icon={<PlusOutlined />} />
                             </ButtonGroup>
                             <p className='product-total'>${total} </p>
-             
-                           
                     </div>
-                  
                 </div>
             );
         })}

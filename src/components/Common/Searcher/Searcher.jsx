@@ -1,16 +1,17 @@
 import React, { useState, useContext } from 'react';
 import { AutoComplete, Input } from 'antd';
 import { StoreContext } from '../../Context/StoreContext';
+import { useNavigate } from 'react-router-dom';
 
 const Searcher = ({ setData }) => {
 
   const { products } = useContext(StoreContext);
   const [options, setOptions] = useState([]);
-  const [items, setItems] = useState(""); 
+  let navigate = useNavigate();
 
   const searchResult = (query) => {
     const filterProducts = products.filter((product) => product.title.toLowerCase().startsWith(query.toLowerCase()));
-    setItems(filterProducts);
+    
     return filterProducts
     .map((product) => {
       const category = product.title;
@@ -33,21 +34,18 @@ const Searcher = ({ setData }) => {
   const handleSearch = (value) => {
     if (value.length === 0) {
         setData(products) 
+        setOptions([])
+        navigate('/')
     } else {
         setOptions(value ? searchResult(value) : []);
     }    
   };
 
   const onSelect = (value) => {
-    const filterProducts = products.filter((product) => product.title.toLowerCase().startsWith(value.toLowerCase()));
+    const filterProducts = products.filter((product) => product.title === value);
+    navigate(`/product/${value}`)
     setData(filterProducts);
   };
-
-  const handleOnClick = () => {
-    if (items.length > 0) {
-        setData(items);
-    }
-  }
 
   return (
     <AutoComplete
@@ -59,7 +57,6 @@ const Searcher = ({ setData }) => {
       options={options}
       onSelect={onSelect}
       onSearch={handleSearch}
-      onClick={handleOnClick}
     >
       <Input.Search size="large" placeholder="Search Product"  />
     </AutoComplete>

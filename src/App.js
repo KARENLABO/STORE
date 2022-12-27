@@ -23,6 +23,7 @@ function App() {
                   subTitle="Sorry, the page you visited does not exist."
                   />}
               />
+              <Route path="/product/*" element={<Home/>}/>
             </Routes>
         </Router>
       </StoreContextProvider>
