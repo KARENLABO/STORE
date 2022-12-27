@@ -34,12 +34,6 @@ function CartProducts() {
         return addProductsToCart(Array.from(removeItem)); 
     }
 
-
-
-  const handleOnPay = () => {
-
-  }
-  
   return (
     <div className="cart-products-container">
         {cart.map((product) => {
