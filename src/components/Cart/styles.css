@@ -16,6 +16,7 @@
     text-transform: capitalize;
     font-family: 'Poppins', sans-serif;
 }
+
 .summary-container{
     background-color: rgba(202, 202, 213, 0.224);
     padding: 1rem 2rem;
@@ -51,4 +52,21 @@
 
 .empty{
     margin-top: 6rem;
+}
+
+@media (max-width: 850px) {
+    .cart{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        margin: 0;
+    }
+
+    .summary-container{
+        padding: 1rem 2rem;
+    }
+
+    .amount-container{
+        grid-row: 1/2;
+        max-height: 300px;
+    }
 }

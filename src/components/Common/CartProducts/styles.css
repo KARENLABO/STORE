@@ -55,3 +55,16 @@
     color: red;
     font-size: 1.4rem;
 }
+
+
+@media (max-width: 850px) {
+    .item-img-cart{
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    .product-container-cart{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr, 1fr;
+    }
+}
